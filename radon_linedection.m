@@ -1,0 +1,38 @@
+I=imread('e:\pictures\heart_broken.png');
+a=rgb2gray(I);
+b=imbinarize(a,50);
+subplot(221);
+imshow(b);
+title('original image');
+theta_step=1;
+theta=0:theta_step:360;
+[R,xp]=radon(b,theta);
+subplot(222);imagesc(theta,xp,R);
+colormap(hot);
+colorbar;
+title('radon transition');
+max_R=max(max(R));
+threshold=0.75;
+[II,JJ]=find(R>=(max_R*threshold));
+[line_n,d]=size(II);
+subplot(223);
+imshow(b);
+title('Linear detection');
+for k=1:line_n
+j=JJ(k);
+i=II(k);
+R_i=(j-1)*theta_step;
+xp_i=xp(i);
+[n,m]=size(b);
+x_o=m/2+(xp_i)*cos(R_i*pi/180);
+y_o=n/2-(xp_i)*sin(R_i*pi/180)+1;
+x1=1;
+xe=m;
+y1=(y_o-(x1-x_o)*tan((R_i)-90)*pi/180);
+ye=(y_o-(xe-x_o)*tan((R_i)-90)*pi/180);
+xv=[x1 xe];
+yv=[y1 ye];
+hold on;
+line(xv,yv);
+plot(x_o,y_o,'r');
+end
