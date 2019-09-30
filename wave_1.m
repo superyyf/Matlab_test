@@ -1,0 +1,20 @@
+load tire 
+colormap(map);
+subplot(131);
+image(wcodemat(X,192));
+title('original image');
+axis square;
+init=3718025452;
+rng(init,'v4');
+Xnoise=X+18*(rand(size(X)));
+subplot(132);
+image(wcodemat(Xnoise,192));
+title('noise image');
+axis square;
+[c,s]=wavedec2(X,2,'sym5');
+[thr,sorh,keepapp]=ddencmp('den','wv',Xnoise);
+[Xdenoise,cxc,lxc,perf0,perf12]=wdencmp('gbl',c,s,'sym5',2,thr,sorh,keepapp);
+subplot(133);
+image(Xdenoise);
+title('after filt');
+axis square;

@@ -1,0 +1,15 @@
+img=imread('gray.tif');
+subplot(231);imshow(img);
+title('original image');
+img1=imnoise(img,'salt & pepper',0.03);
+subplot(232);imshow(img1);
+title('salt&pepper noise');
+img1_out=wiener2(img1,[7,7],'salt & pepper');
+subplot(233);imshow(img1_out);
+title('salt&pepper after filt');
+img2=imnoise(img,'gaussian',0.03);
+subplot(234);imshow(img2);
+title('gaussian noise');
+img2_out=wiener2(img2,[7,7]);
+subplot(235);imshow(img2_out);
+title('gaussian after filt');

@@ -1,0 +1,27 @@
+load cathe_1
+subplot(231);imshow(X,map);
+title('original image');
+axis square;
+init=2026645;
+rng(init);
+Xnoise=X+20*randn(size(X));
+subplot(232);imshow(Xnoise,map);
+title('noise in');
+axis square;
+W=wpdec2(Xnoise,1,'db5');
+R=wprcoef(W,[1,0]);
+subplot(233);imshow(R,map);
+title('approximate part');
+axis square;
+W1=edge(X,'Sobel');
+subplot(234);imshow(W1);
+title('X edge');
+axis square;
+W2=edge(Xnoise,'Sobel');
+subplot(235);imshow(W2);
+title('Xnoise edge');
+axis square;
+W3=edge(R,'Sobel');
+subplot(236);imshow(W3);
+title('R edge');
+axis square;

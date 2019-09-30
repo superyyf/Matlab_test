@@ -1,0 +1,18 @@
+img=imread('gray.tif');
+img1=imnoise(img,'salt & pepper',0.03);
+subplot(231);imshow(img);
+title('original image');
+subplot(232);imshow(img1);
+title('salt&pepper noise');
+k1=medfilt2(img1);
+k2=medfilt2(img1,[5,5]);
+k3=medfilt2(img1,[7,7]);
+k4=medfilt2(img1,[9,9]);
+ subplot(233);imshow(uint8(k1));
+ title('3*3');
+ subplot(234);imshow(uint8(k2));
+ title('5*5');
+ subplot(235);imshow(uint8(k3));
+ title('7*7');
+ subplot(236);imshow(uint8(k4));
+ title('9*9');

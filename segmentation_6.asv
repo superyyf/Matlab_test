@@ -1,0 +1,17 @@
+I=imread('rice.tif');
+I1=qtdecomp(I,0.25);
+blocks=zeros(size(I));
+for dim=[512,256,128,64,32,16,8,4,2]
+    numdim=length(find(I1==dim));
+    if numdim>0
+        values=repmat(ones(1),[dim,dim,numdim]);
+        values(2:dim,2:dim,numdim)=0;
+        blocks=qtsetblk(blocks,I1,dim,values);
+    end
+end
+blocks(end,:)=1;
+blocks(:,end)=1;
+subplot(121);imshow(I);
+title('1');
+subplot(122);imshow(I2);
+title('2');

@@ -1,0 +1,16 @@
+img=imread('gray.tif');
+subplot(221);imshow(img);
+img=double(img);
+title('original image');
+H=fspecial('motion',30,45);
+img1=imfilter(img,H);
+subplot(222);imshow(img1,[]);
+title('motion passvation');
+H=fspecial('disk',10);
+img2=imfilter(img,H);
+subplot(223);imshow(img2,[]);
+title('disk passvation');
+H=fspecial('unsharp');
+img3=imfilter(img,H);
+subplot(224);imshow(img3,[]);
+title('unsharp passvation');

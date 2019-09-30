@@ -1,0 +1,16 @@
+img=imread('rice.tif');
+subplot(231);imshow(img);
+title('original image');
+img1=imbinarize(img,graythresh(img));
+subplot(232);imshow(img1);
+title('bw image');
+dist=bwdist(~img1);
+subplot(233);imshow(dist);
+title('distance image');
+l=watershed(-dist);
+w=l==0;
+subplot(234);imshow(w);
+title('l');
+g=img1&~w;
+subplot(235);imshow(label2rgb(g,'jet'));
+title('1');

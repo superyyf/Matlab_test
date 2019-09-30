@@ -1,0 +1,10 @@
+img=imread('xxx.tif');
+subplot(131);imshow(img);
+title('original image');
+L=[0,1,0;1,-4,1;0,1,0];
+img1=conv2(double(img),double(L),'same');
+subplot(132);imshow(img1,[]);
+title('sharpen image');
+img2=double(img)-img1;
+subplot(133);imshow(img2,[]);
+title('sharpen image');
